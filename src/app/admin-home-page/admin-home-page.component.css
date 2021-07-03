@@ -1,0 +1,23 @@
+.floating-button{
+    position: relative;
+    left: 30%;
+    top: 30%;
+    border-radius: 3px;
+    padding: 10px;
+    text-align: center;
+    height: 250px;
+    width: 350px;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+}
+.floating-button:hover{
+    box-shadow: 2px 2px 29px 4px rgba(0,0,0,0.26);
+}
+a{text-decoration: none;}
+i{font-size: 90px;}
+span{font-size: 30px;}
+.xmargin{
+    margin: 0 100px 0 100px;
+}

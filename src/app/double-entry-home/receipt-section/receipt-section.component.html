@@ -1,0 +1,124 @@
+<form>
+    <div class="row" style="margin: 0">
+        <div class="col-3 p-0" id="sticky-sidebar">
+            <div class="bg-dark-gray">
+                <div class="list-group">
+                    <a routerLink="/double-entry-home/receipt-section"
+                        class="list-group-item list-group-item-action text-center h5">Receipt Section</a>
+                </div>
+                <div class="list-group">
+                    <button (click)="exportReceipt()"
+                        class="list-group-item list-group-item-action text-center h5">Balance Sheet</button>
+                </div>
+            </div>
+        </div>
+        <div class="col order-1 p-0" id="main">
+            <div class="jumbotron h1">
+                Receipt Section
+            </div>
+            <div class="form-row m-0">
+                <div class="col-3">
+                    <label for="inputState" class="h6">Main Heads</label>
+                    <select #mainHead (change)="onHeadChanged(mainHead.value)" id="inputState" class="form-control">
+                        <option *ngFor="let head of headsInfoList; let i = index;"
+                            [attr.selected]='i == 0 ? "selected" : null' [value]="i">{{head.mainHeadName}}</option>
+                    </select>
+                </div>
+                <div class="col-3">
+                    <label for="inputState" class="h6">Bank Name</label>
+                    <select #bankList (change)="onBankChanged(bankList.value)" id="inputState" class="form-control">
+                        <option *ngFor="let bank of bankInfoList; let i = index;"
+                            [attr.selected]='i == 0 ? "selected" : null' [value]="i">{{bank.bankName}}</option>
+                    </select>
+                </div>
+                <div class="col-5">
+                    <label for="inputState" class="h6">Account No.</label>
+                    <select id="ddlAccounts" class="form-control" (change)="onAccountChange()">
+                        <option *ngFor="let account of accountsList" value="{{account.bankAccount}}">{{account.accountTitle}},
+                            {{account.bankAccount}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="form-row m-0">
+                <div>
+                    <table>
+
+                        <body>
+                            <tr *ngFor="let subHead of subHeadsList; let i = index">
+                                <td>
+                                    <label style="width: 200px" class="h6">{{subHead.subHeadName}}</label>
+                                </td>
+                                <td>
+                                    <input style="width: 200px" type="text" class="form-control"
+                                        (input)="getSubHeadInput($event.target.value, subHead.id)">
+                                </td>
+                                <td>
+                                    <br><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label style="width: 100px" class="h6">Date: </label>
+                                </td>
+                                <td>
+                                    <input style="width: 200px" type="date" class="form-control" [(ngModel)]="date"
+                                        name="date">
+                                </td>
+                                <td>
+                                    <br><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label style="width: 100px" class="h6">Details: </label>
+                                </td>
+                                <td>
+                                    <textarea style="width: 200px" class="form-control" [(ngModel)]="details"
+                                        name="details"></textarea>
+                                </td>
+                                <td>
+                                    <br><br>
+                                </td>
+                            </tr>
+                        </body>
+                    </table>
+                </div>
+            </div>
+            <br>
+            <button class="btn btn-primary" (click)="submit()">Submit</button>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+</form>
+<!-- Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-title text-success h4" id="exampleModalLabel">Receipt saved successfully.</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="emptyFeildsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-title h4 text-danger" id="exampleModalLabel">Some feilds are empty.</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
